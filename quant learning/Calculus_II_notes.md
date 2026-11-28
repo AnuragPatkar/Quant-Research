@@ -685,3 +685,691 @@ $$
 > **Final Quant Researcher Takeaway:** Integration helps calculate expected outcomes, but convergence analysis tells us whether those expectations actually exist. In quantitative finance, knowing when a mathematical quantity is infinite can be just as important as knowing how to calculate it.
 calculus_ii_lesson_1_advanced_integration-v2.md
 Displaying calculus_ii_lesson_1_advanced_integration-v2.md.
+
+
+# Calculus II — Lesson 2: Trigonometric Integrals
+
+**Priority:** CORE  
+**Status:** Completed  
+**Estimated study time:** 60–90 minutes  
+**Prerequisites:** Basic integration, Power Rule, trigonometric identities, U-substitution.
+
+---
+
+## 1. Why Trigonometric Integrals Matter
+
+Trigonometric integrals involve functions such as:
+
+$$
+\int \sin^m x \cos^n x \, dx
+$$
+
+and
+
+$$
+\int \tan^m x \sec^n x \, dx
+$$
+
+They are useful for:
+
+- Probability and distribution calculations.
+- Mathematical modelling.
+- Fourier analysis and signal processing.
+- Analytical derivations in quantitative finance.
+- Understanding transformations involving periodic functions.
+
+**Hinglish intuition:** Trigonometric integrals mein main challenge integration karna nahi, balki correct identity aur substitution choose karna hai.
+
+---
+
+## 2. Fundamental Trigonometric Identities
+
+### Pythagorean identities
+
+$$
+\boxed{\sin^2 x + \cos^2 x = 1}
+$$
+
+Rearranging:
+
+$$
+\sin^2 x = 1 - \cos^2 x
+$$
+
+$$
+\cos^2 x = 1 - \sin^2 x
+$$
+
+For tangent and secant:
+
+$$
+\boxed{1 + \tan^2 x = \sec^2 x}
+$$
+
+$$
+\boxed{\sec^2 x - \tan^2 x = 1}
+$$
+
+### Power-reduction identities
+
+These are derived from double-angle identities.
+
+$$
+\boxed{\sin^2 x = \frac{1 - \cos 2x}{2}}
+$$
+
+$$
+\boxed{\cos^2 x = \frac{1 + \cos 2x}{2}}
+$$
+
+These are especially useful when both sine and cosine have even powers.
+
+### Derivative identities
+
+$$
+\frac{d}{dx}\sin x = \cos x
+$$
+
+$$
+\frac{d}{dx}\cos x = -\sin x
+$$
+
+$$
+\frac{d}{dx}\tan x = \sec^2 x
+$$
+
+$$
+\frac{d}{dx}\sec x = \sec x \tan x
+$$
+
+**Important:** Integration strategies are derived from identities and derivative matching, not arbitrary memorization.
+
+---
+
+## 3. Strategy 1: Odd Power of Sine
+
+Consider:
+
+$$
+I = \int \sin^m x \cos^n x \, dx
+$$
+
+When the sine power is odd:
+
+1. Save one sine factor.
+2. Convert remaining sine powers using $\sin^2 x = 1 - \cos^2 x$.
+3. Substitute $u = \cos x$.
+
+### Worked example
+
+$$
+I = \int \sin^3 x \cos^2 x \, dx
+$$
+
+Step 1: Save one sine.
+
+$$
+I = \int \sin^2 x \cos^2 x \sin x \, dx
+$$
+
+Step 2: Apply identity.
+
+$$
+I = \int (1 - \cos^2 x)\cos^2 x \sin x \, dx
+$$
+
+Step 3: Substitute.
+
+$$
+u = \cos x, \qquad du = -\sin x \, dx
+$$
+
+Therefore:
+
+$$
+I = -\int (1 - u^2)u^2 \, du
+$$
+
+$$
+I = -\int (u^2 - u^4) \, du
+$$
+
+Integrating:
+
+$$
+I = -\frac{u^3}{3} + \frac{u^5}{5} + C
+$$
+
+Substitute back:
+
+$$
+\boxed{I = -\frac{\cos^3 x}{3} + \frac{\cos^5 x}{5} + C}
+$$
+
+---
+
+## 4. Strategy 2: Odd Power of Cosine
+
+When cosine has an odd power:
+
+1. Save one cosine factor.
+2. Convert remaining cosine powers using $\cos^2 x = 1 - \sin^2 x$.
+3. Substitute $u = \sin x$.
+
+### Worked example
+
+$$
+I = \int \sin^4 x \cos^3 x \, dx
+$$
+
+Save one cosine:
+
+$$
+I = \int \sin^4 x \cos^2 x \cos x \, dx
+$$
+
+Apply identity:
+
+$$
+I = \int \sin^4 x (1 - \sin^2 x) \cos x \, dx
+$$
+
+Substitute:
+
+$$
+u = \sin x, \qquad du = \cos x \, dx
+$$
+
+Therefore:
+
+$$
+I = \int u^4(1 - u^2) \, du
+$$
+
+$$
+I = \int (u^4 - u^6) \, du
+$$
+
+$$
+I = \frac{u^5}{5} - \frac{u^7}{7} + C
+$$
+
+Final answer:
+
+$$
+\boxed{I = \frac{\sin^5 x}{5} - \frac{\sin^7 x}{7} + C}
+$$
+
+---
+
+## 5. Strategy 3: Both Powers Even
+
+When both sine and cosine have even powers, use power-reduction identities.
+
+### Worked example
+
+$$
+I = \int \sin^2 x \cos^2 x \, dx
+$$
+
+Apply identities:
+
+$$
+I = \int \left(\frac{1 - \cos 2x}{2}\right)\left(\frac{1 + \cos 2x}{2}\right) dx
+$$
+
+Multiply:
+
+$$
+I = \frac{1}{4} \int (1 - \cos^2 2x) \, dx
+$$
+
+Using:
+
+$$
+1 - \cos^2 2x = \sin^2 2x
+$$
+
+Therefore:
+
+$$
+I = \frac{1}{4} \int \sin^2 2x \, dx
+$$
+
+Apply power reduction:
+
+$$
+\sin^2 2x = \frac{1 - \cos 4x}{2}
+$$
+
+Thus:
+
+$$
+I = \frac{1}{8} \int (1 - \cos 4x) \, dx
+$$
+
+Integrate:
+
+$$
+I = \frac{x}{8} - \frac{\sin 4x}{32} + C
+$$
+
+Final answer:
+
+$$
+\boxed{I = \frac{x}{8} - \frac{\sin 4x}{32} + C}
+$$
+
+**Important:** When integrating $\cos 4x$, remember the chain-rule factor:
+
+$$
+\int \cos 4x \, dx = \frac{\sin 4x}{4} + C
+$$
+
+---
+
+## 6. Strategy 4: Tangent and Secant Integrals
+
+Consider:
+
+$$
+\int \tan^m x \sec^n x \, dx
+$$
+
+Two important derivative matches:
+
+$$
+\frac{d}{dx}\tan x = \sec^2 x
+$$
+
+$$
+\frac{d}{dx}\sec x = \sec x \tan x
+$$
+
+### Case A: Even power of secant
+
+Save $\sec^2 x$, substitute:
+
+$$
+u = \tan x
+$$
+
+Use:
+
+$$
+\sec^2 x = 1 + \tan^2 x
+$$
+
+Example:
+
+$$
+I = \int \tan^3 x \sec^2 x \, dx
+$$
+
+Let:
+
+$$
+u = \tan x, \qquad du = \sec^2 x \, dx
+$$
+
+Then:
+
+$$
+I = \int u^3 \, du
+$$
+
+$$
+\boxed{I = \frac{\tan^4 x}{4} + C}
+$$
+
+### Case B: Odd power of tangent
+
+Save $\sec x \tan x$, substitute:
+
+$$
+u = \sec x
+$$
+
+Use:
+
+$$
+\tan^2 x = \sec^2 x - 1
+$$
+
+Example:
+
+$$
+I = \int \tan^3 x \sec^3 x \, dx
+$$
+
+Rewrite:
+
+$$
+I = \int \tan^2 x \sec^2 x (\sec x \tan x) \, dx
+$$
+
+Substitute:
+
+$$
+u = \sec x, \qquad du = \sec x \tan x \, dx
+$$
+
+Then:
+
+$$
+I = \int (u^2 - 1)u^2 \, du
+$$
+
+$$
+I = \int (u^4 - u^2) \, du
+$$
+
+Final answer:
+
+$$
+\boxed{I = \frac{\sec^5 x}{5} - \frac{\sec^3 x}{3} + C}
+$$
+
+---
+
+## 7. Quick Strategy Selection Table
+
+| Integrand pattern | Recommended strategy |
+| :--- | :--- |
+| Odd sine power | Save one sine; $u = \cos x$ |
+| Odd cosine power | Save one cosine; $u = \sin x$ |
+| Both powers even | Power reduction |
+| Even secant power | Save $\sec^2 x$; $u = \tan x$ |
+| Odd tangent power | Save $\sec x \tan x$; $u = \sec x$ |
+
+**Remember:** These are useful strategies, not universal laws. Always check whether your substitution simplifies the integral.
+
+---
+
+## 8. Numerical Integration Using Python
+
+Analytical integration is not always convenient or possible.
+
+For numerical definite integration, SciPy provides:
+
+```python
+from scipy.integrate import quad
+
+result, error = quad(function, lower_limit, upper_limit)
+```
+
+- `result`: Numerical integral estimate.
+- `error`: Estimated absolute numerical integration error.
+
+### Example 1: Integrate a trigonometric function
+
+Calculate:
+
+$$
+I = \int_0^{\pi/2} \sin^3 x \cos^2 x \, dx
+$$
+
+Analytical answer:
+
+$$
+I = \frac{2}{15} \approx 0.1333333
+$$
+
+Python implementation:
+
+```python
+import numpy as np
+from scipy.integrate import quad
+
+# Define the integrand
+def f(x):
+    return np.sin(x)**3 * np.cos(x)**2
+
+# Numerical integration
+result, error = quad(f, 0, np.pi/2)
+
+# Analytical result
+analytical = 2/15
+
+# Absolute difference
+difference = abs(result - analytical)
+
+print("Numerical result:", result)
+print("Estimated error:", error)
+print("Analytical result:", analytical)
+print("Absolute difference:", difference)
+```
+
+### Example 2: Both powers even
+
+Calculate:
+
+$$
+I = \int_0^{\pi/2} \sin^2 x \cos^2 x \, dx
+$$
+
+Analytical answer:
+
+$$
+I = \frac{\pi}{16}
+$$
+
+Python:
+
+```python
+import numpy as np
+from scipy.integrate import quad
+
+def g(x):
+    return np.sin(x)**2 * np.cos(x)**2
+
+result, error = quad(g, 0, np.pi/2)
+
+analytical = np.pi / 16
+
+difference = abs(result - analytical)
+
+print("Numerical result:", result)
+print("Estimated error:", error)
+print("Analytical result:", analytical)
+print("Absolute difference:", difference)
+```
+
+Observed output:
+
+```text
+Numerical result: 0.19634954084936207
+Estimated error: 2.179917811255395e-15
+Analytical result: 0.19634954084936207
+Absolute difference: 0.0
+```
+
+The two computed floating-point results match. This does not mean mathematical error is necessarily zero.
+
+---
+
+## 9. Understanding Numerical Tolerances
+
+SciPy's `quad()` accepts:
+
+- `epsabs`: Requested absolute error tolerance.
+- `epsrel`: Requested relative error tolerance.
+
+Example:
+
+```python
+result, error = quad(
+    f,
+    0,
+    np.pi/2,
+    epsabs=1e-10,
+    epsrel=1e-10
+)
+```
+
+A simplified description of the error acceptance criterion is:
+
+$$
+\boxed{\text{Error estimate} \lesssim \max(\text{epsabs}, \text{epsrel}|I|)}
+$$
+
+These are requested tolerances, not guaranteed bounds on the true error.
+
+### Numerical example
+
+Suppose:
+
+$$
+I = 20
+$$
+
+$$
+\text{epsabs} = 0.005
+$$
+
+$$
+\text{epsrel} = 0.001
+$$
+
+Relative component:
+
+$$
+0.001 \times 20 = 0.02
+$$
+
+Simplified threshold:
+
+$$
+\max(0.005, 0.02) = 0.02
+$$
+
+---
+
+## 10. Numerical Validation: Researcher's Mindset
+
+A small error estimate does not guarantee that a calculation is correct.
+
+When no analytical solution is available, confidence can be improved through:
+
+- Independent numerical methods.
+- Convergence testing with tighter tolerances.
+- Splitting the integration interval and comparing results.
+- Mathematical sanity checks.
+- Sensitivity testing and inspection of tail contributions.
+
+### Other important checks
+
+- Verify the integrand and integration limits.
+- Confirm radians versus degrees.
+- Check probability bounds when integrating probability densities.
+- Check dimensions and expected magnitudes.
+
+### Research principle
+
+$$
+\boxed{\text{Numerical accuracy} \neq \text{Implementation correctness}}
+$$
+
+One successful test case does not establish universal correctness.
+
+---
+
+## 11. Quant Finance Applications
+
+### A. Probability calculations
+
+Probability densities often require integration:
+
+$$
+P(a < X < b) = \int_a^b f_X(x) \, dx
+$$
+
+### B. Option pricing
+
+Risk-neutral pricing can involve expectations:
+
+$$
+V_0 = e^{-rT} \mathbb{E}^{\mathbb{Q}}[H(S_T)]
+$$
+
+For continuous distributions, expectations can become integrals.
+
+### C. Risk measurement
+
+Tail probabilities and expected shortfall calculations may require numerical integration, especially for complicated distributions.
+
+### Theory vs Reality
+
+Real financial models may contain:
+
+- Heavy tails.
+- Discontinuous payoffs.
+- Singularities.
+- Complicated distributions.
+- Numerical instability.
+
+A mathematically valid numerical answer still requires model validation and economic interpretation.
+
+---
+
+## 12. Common Mistakes
+
+- Forgetting the chain-rule factor when integrating expressions such as $\cos 4x$.
+- Choosing substitution without checking derivative matching.
+- Using degrees instead of radians in NumPy.
+- Assuming a small `quad()` error estimate proves correctness.
+- Confusing estimated numerical error with standard deviation.
+- Treating agreement on one test case as universal validation.
+- Forgetting the constant of integration ($+C$) in indefinite integration.
+
+---
+
+## 13. Interview Takeaways
+
+Be ready to explain:
+
+- Why odd sine powers suggest $u = \cos x$.
+- Why odd cosine powers suggest $u = \sin x$.
+- Why power-reduction identities work for even powers.
+- Why numerical and analytical solutions should be compared when possible.
+- What SciPy's `quad()` error output represents.
+- Why a small estimated error does not guarantee correctness.
+- How to validate numerical integration without an analytical solution.
+
+---
+
+## 14. Cheat Sheet
+
+### Formulas to memorize
+
+$$
+\sin^2 x + \cos^2 x = 1
+$$
+
+$$
+\sin^2 x = \frac{1 - \cos 2x}{2}
+$$
+
+$$
+\cos^2 x = \frac{1 + \cos 2x}{2}
+$$
+
+$$
+1 + \tan^2 x = \sec^2 x
+$$
+
+$$
+\frac{d}{dx}\tan x = \sec^2 x
+$$
+
+$$
+\frac{d}{dx}\sec x = \sec x \tan x
+$$
+
+### Three-line Hinglish revision
+
+1. Odd power ho toh ek factor save karke derivative matching substitution choose karo.
+2. Dono powers even hon toh power-reduction identities lagao.
+3. Numerical answer ko blindly trust mat karo; independent validation aur convergence checks karo.
+calculus_ii_lesson_2_trigonometric_integrals.md
+Displaying calculus_ii_lesson_2_trigonometric_integrals.md.
